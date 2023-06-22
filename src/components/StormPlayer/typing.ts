@@ -82,7 +82,7 @@ export interface ReverseEff {
     layer: number
 }
 export interface ReversePic {
-    picType: number
+    picType: ReversePictureType
     cirRadius: number
     picColor: string
     picture: string

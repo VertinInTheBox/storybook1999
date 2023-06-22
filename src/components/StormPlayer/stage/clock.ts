@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const clock = new EventEmitter()
 export const clockRunning = ref(false)
 export const videoPlaying = ref(false)
-const howl = new Howl({
+new Howl({
     src: ['']
 })
 export const _runtick = () => {
@@ -27,4 +27,12 @@ export const tickDelay = async (delay: number) => {
     while (performance.now() - now < delay) {
         await tick()
     }
+}
+
+export const untilNext = async () => {
+    return new Promise<void>((resolve) => {
+        clock.once('next', () => {
+            resolve()
+        })
+    })
 }

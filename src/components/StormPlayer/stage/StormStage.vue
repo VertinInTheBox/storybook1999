@@ -1,6 +1,7 @@
 <template>
     <article class="storm-stage">
         <ConversatonController :conversation="step?.conversation || {}" />
+        <PicImg :picList="step?.picList || []" />
         <VideoController :videoList="step?.videoList || []" />
         <AudioController :audioList="step?.audioList || []" />
         <BgImg :bg="step?.bg" />
@@ -16,6 +17,7 @@ import ConversatonController from './Conversation/ConversationController.vue'
 import VideoController from './Video/VideoController.vue'
 import AudioController from './Audio/AudioController.vue'
 import BgImg from './Image/BgImg.vue'
+import PicImg from './Image/PicImg.vue'
 import { _runtick, clockRunning, tick, tickDelay } from './clock'
 import { ref, watchEffect, onMounted, onBeforeUnmount } from 'vue'
 import { nextTick } from 'vue'
