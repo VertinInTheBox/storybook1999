@@ -19,26 +19,30 @@ watchEffect(() => {
         console.log(item)
         switch (item.orderType) {
             case ReverseAudioOrderType.Single:
-                currentAudioList.value[item.audio] = new Howl({
-                    src: [assetByName(item.audio.toString()).toString()],
-                    format: ['ogg'],
-                    loop: false,
-                    autoplay: false
-                })
-                clock.once('tick', () => {
-                    currentAudioList.value[item.audio].play()
-                })
+                if (!currentAudioList.value[item.audio]) {
+                    currentAudioList.value[item.audio] = new Howl({
+                        src: [assetByName(item.audio.toString()).toString()],
+                        format: ['ogg'],
+                        loop: false,
+                        autoplay: false
+                    })
+                    clock.once('tick', () => {
+                        currentAudioList.value[item.audio].play()
+                    })
+                }
                 break
             case ReverseAudioOrderType.Continuity:
-                currentAudioList.value[item.audio] = new Howl({
-                    src: [assetByName(item.audio.toString()).toString()],
-                    format: ['ogg'],
-                    loop: true,
-                    autoplay: false
-                })
-                clock.once('tick', () => {
-                    currentAudioList.value[item.audio].play()
-                })
+                if (!currentAudioList.value[item.audio]) {
+                    currentAudioList.value[item.audio] = new Howl({
+                        src: [assetByName(item.audio.toString()).toString()],
+                        format: ['ogg'],
+                        loop: true,
+                        autoplay: false
+                    })
+                    clock.once('tick', () => {
+                        currentAudioList.value[item.audio].play()
+                    })
+                }
                 break
             case ReverseAudioOrderType.Destroy:
                 const audio = item.audio

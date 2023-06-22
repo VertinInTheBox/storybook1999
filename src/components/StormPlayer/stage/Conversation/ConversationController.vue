@@ -10,6 +10,7 @@ import { type ReverseStory, ReverseConversationType } from '../../typing'
 import Conversation from './Conversation.vue'
 import { clock, tick, videoPlaying } from '../clock'
 import { Howl } from 'howler'
+import { nextTick } from 'vue'
 const props = defineProps<{
     conversation: ReverseStory['conversation']
 }>()
@@ -18,23 +19,30 @@ const next = inject('next') as () => void
 let startTick = performance.now()
 const convShow = ref(true)
 const nextInvoked = ref(false)
+let conversationHowl: Howl | null = null
 watch(
     () => props.conversation,
     () => {
         startTick = performance.now()
         convShow.value = true
         nextInvoked.value = false
-        if (!videoPlaying.value && props.conversation.audio) {
-            const howl = new Howl({
-                src: [assetByName(props.conversation.audio.toString()).toString()],
-                format: ['ogg'],
-                loop: false,
-                autoplay: false
-            })
-            tick().then(() => {
-                howl.play()
-            })
+        if (conversationHowl) {
+            conversationHowl.stop()
+            conversationHowl = null
         }
+        nextTick()
+            .then(tick)
+            .then(() => {
+                if (!videoPlaying.value && props.conversation.audio) {
+                    conversationHowl = new Howl({
+                        src: [assetByName(props.conversation.audio.toString()).toString()],
+                        format: ['ogg'],
+                        loop: false,
+                        autoplay: false
+                    })
+                    conversationHowl?.play()
+                }
+            })
     }
 )
 const onTick = () => {
