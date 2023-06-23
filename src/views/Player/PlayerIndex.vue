@@ -153,6 +153,16 @@ provide('assetByName', assetByName)
             }
         }
     })
+    const font = stageLoader.push(`https://orange.vertin.one/font/hwzs.woff2`)
+    font.customLoader = async function () {
+        const font = new FontFace('hwzs', `url(${this.blobUrl})`)
+        document.fonts.add(font)
+    }
+    const font2 = stageLoader.push(`https://orange.vertin.one/font/LiberationSans.woff2`)
+    font2.customLoader = async function () {
+        const font = new FontFace('Liberation Sans', `url(${this.blobUrl})`)
+        document.fonts.add(font)
+    }
     loadingText.value = `正在加载资源 (0/${Object.keys(stageLoader.store).length})`
     await stageLoader.ensure((cur, tot) => {
         loadingText.value = `正在加载资源 (${cur}/${tot})`
@@ -200,6 +210,7 @@ provide('assetByName', assetByName)
     }
 }
 .loading {
+    font-family: Arial, 华文中宋, hwzs;
     background: transparent no-repeat center;
     background-image: url('@/assets/loading.webp');
     position: absolute;
@@ -261,6 +272,11 @@ provide('assetByName', assetByName)
         color: rgba(255, 255, 255, 0.7);
         font-size: 12px;
         left: 50px;
+        .intro-subtitle {
+            font-size: 12px;
+            zoom: 0.7;
+            margin-top: 5px;
+        }
     }
 
     .intro-header {
@@ -274,8 +290,7 @@ provide('assetByName', assetByName)
         position: relative;
         display: flex;
         align-items: flex-start;
-        margin: 6px 0;
-        margin-bottom: 2px;
+        margin: 2px 0;
     }
 
     .intro-line-sep {
@@ -309,6 +324,7 @@ provide('assetByName', assetByName)
     right: 0;
     bottom: 0;
     z-index: 2;
+    font-family: Arial, 华文中宋, hwzs;
 }
 .clock-click {
     position: absolute;
