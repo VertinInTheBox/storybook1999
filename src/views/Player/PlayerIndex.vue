@@ -210,7 +210,7 @@ provide('assetByName', assetByName)
     }
 }
 .loading {
-    font-family: Arial, 华文中宋, hwzs;
+    font-family: 华文中宋, hwzs;
     background: transparent no-repeat center;
     background-image: url('@/assets/loading.webp');
     position: absolute;
@@ -324,7 +324,7 @@ provide('assetByName', assetByName)
     right: 0;
     bottom: 0;
     z-index: 2;
-    font-family: Arial, 华文中宋, hwzs;
+    font-family: 华文中宋, hwzs;
 }
 .clock-click {
     position: absolute;
