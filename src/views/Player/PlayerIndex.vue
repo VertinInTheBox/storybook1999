@@ -169,7 +169,7 @@ provide('assetByName', assetByName)
     router.replace({
         query: {
             ...route.query,
-            story: currentStory.value,
+            story: Object.keys(storyList.value).length > 1 ? currentStory.value : undefined,
             step:
                 currentStep.value < 0
                     ? getFirstStep(storyList.value[storyIds[0]])
