@@ -1,3 +1,25 @@
+# 重返未来：1999 剧情模拟器
+去掉游戏性就更好了。绝赞挖坑中。
+
+当前进度：
+ - [x] 语音播放、BGM播放
+ - [x] 背景及前景图片展示
+ - [x] 视频播放、视频字幕
+ - [ ] 分支、选项、跳转
+ - [ ] 角色 Live2D
+ - [ ] 主角 Live2D
+ - [ ] 过渡动画、动效
+ - [ ] 渲染特效
+
+测试体验地址：
+ - https://vertin.one/player/100001
+ - https://vertin.one/player/100436
+ - https://vertin.one/player/100437
+
+未完成部分实在太多，不保证其他剧情能正常播放
+
+--------
+
 # storybook1999
 
 This template should help get you started developing with Vue 3 in Vite.
