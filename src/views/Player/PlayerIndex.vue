@@ -70,12 +70,12 @@ const totalProgress = computed(() => {
     return loadProgress.value * 0.15 + dataProgress.value * 0.7 + miscProgress.value * 0.15
 })
 const fetchStory = async (id: string) => {
-    const res = await fetch(`https://foundation.vertin.one/story/${id}.json`)
+    const res = await fetch(`https://orange.vertin.one/story/${id}.json`)
     const data = await res.json()
     return data
 }
 const urlByName = (name: string, type: string) => {
-    return `https://foundation.vertin.one/${type}/${name
+    return `https://orange.vertin.one/${type}/${name
         .replace('.jpg', '.webp')
         .replace('.png', '.webp')}`
 }
