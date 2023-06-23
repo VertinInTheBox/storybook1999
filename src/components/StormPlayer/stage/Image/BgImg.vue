@@ -1,17 +1,19 @@
 <template>
     <div class="storm-bg-img">
-        <img
-            v-if="bgImg && bgImg.bgImg"
-            :src="assetByName(bgImg.bgImg)"
-            alt=""
-            :style="{ transform, transition }"
-        />
+        <div class="eff-area" :class="`eff-${ReverseBgEffectType[bgImg.effType]?.toLowerCase()}`">
+            <img
+                v-if="bgImg && bgImg.bgImg"
+                :src="assetByName(bgImg.bgImg)"
+                alt=""
+                :style="{ transform, transition }"
+            />
+        </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, watch, inject } from 'vue'
-import type { ReverseStory } from '../../typing'
+import { type ReverseStory, ReverseBgEffectType } from '../../typing'
 import { asset, type Asset } from '@xytoki/asset-loader'
 const props = defineProps<{
     bg: ReverseStory['bg']
@@ -57,6 +59,18 @@ watch(
     position: absolute;
     overflow: hidden;
     z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .eff-area {
+        width: 110%;
+        height: 110%;
+        transition: transform 0.1s;
+        will-change: transform;
+        &.eff-shake {
+            animation: storm-bg-shake 0.4s infinite;
+        }
+    }
 }
 
 .storm-bg-img img {
@@ -66,5 +80,23 @@ watch(
     object-fit: cover;
     will-change: transform;
     transition: transform 1s;
+}
+
+@keyframes storm-bg-shake {
+    0% {
+        transform: translateX(0) translateY(1px);
+    }
+    25% {
+        transform: translateX(1px) translateY(0);
+    }
+    50% {
+        transform: translateX(-1px) translateY(0);
+    }
+    75% {
+        transform: translateX(1px) translateY(0);
+    }
+    100% {
+        transform: translateX(0) translateY(1px);
+    }
 }
 </style>
