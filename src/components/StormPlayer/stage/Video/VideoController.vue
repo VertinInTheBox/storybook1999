@@ -8,7 +8,7 @@
             :src="assetByName(i.video)"
             :style="{ zIndex: 200 + i.layer * 10 }"
             :loop="i.loop"
-            poster="noposter"
+            :poster="transparentImg"
             @ended="onVideoEnd"
             preload="auto"
             muted
@@ -25,6 +25,20 @@ const props = defineProps<{
 }>()
 const currentVideoList = ref([] as ReverseVideo[])
 const currentVideoRefList = ref([] as HTMLVideoElement[])
+const transparentImg = ref('')
+const canvas = document.createElement('canvas')
+canvas.width = 1
+canvas.height = 1
+canvas.style.position = 'absolute'
+canvas.style.top = '-100%'
+canvas.style.left = '-100%'
+canvas.style.zIndex = '-100'
+document.body.appendChild(canvas)
+const ctx = canvas.getContext('2d')!
+ctx.fillStyle = 'rgba(0,0,0,0)'
+ctx.fillRect(0, 0, 1, 1)
+transparentImg.value = canvas.toDataURL()
+document.body.removeChild(canvas)
 const assetByName = inject('assetByName') as (name: string) => string
 const onVideoEnd = (e: Event) => {
     const video = e.target as HTMLVideoElement
