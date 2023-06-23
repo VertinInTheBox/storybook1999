@@ -48,6 +48,8 @@ watch(
     () => props.bg,
     () => {
         bgImg.value = props.bg && props.bg.bgImg ? props.bg : bgImg.value
+        bgImg.value.effType = props.bg.effType || ReverseBgEffectType.None
+        bgImg.value.transType = props.bg.transType || 0
     }
 )
 </script>
