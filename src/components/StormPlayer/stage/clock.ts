@@ -1,5 +1,6 @@
 import { EventEmitter } from 'eventemitter3'
 import { Howl, Howler } from 'howler'
+import { nextTick } from 'vue'
 import { ref } from 'vue'
 export const clock = new EventEmitter()
 export const clockRunning = ref(false)
@@ -20,6 +21,10 @@ export const tick = () => {
             resolve()
         })
     })
+}
+
+export const domTick = () => {
+    return Promise.all([nextTick(), tick()])
 }
 
 export const tickDelay = async (delay: number) => {
